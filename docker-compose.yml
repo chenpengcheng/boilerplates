@@ -1,0 +1,27 @@
+mysql:
+  image: mysql:latest
+  environment:
+    - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    - MYSQL_USER=${MYSQL_USER}
+    - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    - MYSQL_DATABASE=${MYSQL_DATABASE}
+  ports:
+    - "3306:3306"
+  command: --default-authentication-plugin=mysql_native_password
+  volumes:
+    - ./data/mysql:/var/lib/mysql
+
+mongo:
+  image: mongo:latest
+  environment:
+    - MONGO_DATA_DIR=/data/db
+  ports:
+      - 27017:27017
+  command: mongod --smallfiles
+  volumes:
+    - ./data/mongo:/data/db
+
+redis:
+  image: redis
+  ports:
+    - "6379:6379"
